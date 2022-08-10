@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <section class="jumbotron text-center bg-white">
+        <div class="container">
+            <h1>{{ user.username }}'s Favourite Movies</h1>
+            <p class="lead text-muted">You can remove or view the your favourite movies</p>
+        </div>
+    </section>
+</div>
+<div class="row">
+    {% for f in favourites_add %}
+        <div class="col-md-4">
+            <a class="text-dark" href="{{ f.get_absolute_url }}">
+                <div class="card mb-4 box-shadow">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ f.image }}" alt="{{ f.name }}">
+                            <div class="card-body">
+                                <h2 style="font-size:18px;font-weight:bold">{{f.name}}</h2>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted"></small>
+                                    <div id="favourite-section"><a href="{% url 'main:favourites_add' f.id %}"
+                                                                   class="btn btn-outline-primary">Remove</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <div class="container-fluid">
+            <h3>No Favourite Movie Found. </h3>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
