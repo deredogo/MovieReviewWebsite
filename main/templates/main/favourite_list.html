@@ -5,7 +5,7 @@
     <section class="jumbotron text-center bg-white">
         <div class="container">
             <h1>{{ user.username }}'s Favourite Movies</h1>
-            <p class="lead text-muted">You can remove or view the your favourite movies</p>
+            <p class="lead text-muted">You can remove or view your favourite movies</p>
         </div>
     </section>
 </div>
@@ -16,7 +16,7 @@
                 <div class="card mb-4 box-shadow">
                     <div class="card">
                         <div class="card-body">
-                            <img class="card-img-top" src="{{ f.image }}" alt="{{ f.name }}">
+                            <img class="card-img-top" src="https://image.tmdb.org/t/p/original/{{ f.image }}" alt="{{ f.name }}">
                             <div class="card-body">
                                 <h2 style="font-size:18px;font-weight:bold">{{f.name}}</h2>
                                 <div class="d-flex justify-content-between align-items-center">

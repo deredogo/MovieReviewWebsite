@@ -1,40 +1,29 @@
 {% extends "main/base.html" %}
 {% block title %}Profile Page{% endblock title %}
 {% block content %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'accounts.css' %}" >
+
+
 
 <main class="container my-4">
     <h3 class="my-4 border-bottom pb-1">Edit Profile</h3>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-lg-4 pb-5">
                 <!-- Account Sidebar-->
-                <div class="author-card pb-3">
-                    <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
-                    <div class="author-card-profile">
-                        <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
-                        </div>
-                        <div class="author-card-details">
-                            <h5 class="author-card-name text-lg">{{ user.first_name }} {{user.last_name}}</h5><span class="author-card-position">Joined {{ user.date_joined }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {% include "accounts/sidebar.html" %}
          <!-- Account Sidebar-->
-            <div class="col-md-9">
-              {% if msg %}
-                <p class="text-success">{{msg}}</p>
-                {% endif %}
-                <table class="table table-bordered">
-                    <form methods="post">
-                        {% csrf_token %}
-                        {{ form.as_table}}
-                        <tr>
-                            <td colspan="2">
-                                <input type="submit" value="Save" class="btn btn-primary" />
-                            </td>
-                        </tr>
-                    </form>
-                </table>
-            </div>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                    {{ form.as_table }}
+                    {{ profile_form.as_table }}
+                    </table>
+                    <button type="submit">Submit</button>
+                </form>
+                <br>
+
         </div>
 </main>
 

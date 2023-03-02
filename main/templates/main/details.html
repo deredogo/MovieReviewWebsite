@@ -7,17 +7,22 @@
         <div class="card-body">
         <div class="row">
             <div class="col-md-4">
-               <img src="{{ movie.image }}" alt="{{ movie.name }}" class="img-fluid" >
+               <img src="https://image.tmdb.org/t/p/original/{{ movie.image }}" alt="{{ movie.name }}" class="img-fluid" >
             </div>
             <div class="col-md-8">
                 <h3 class="text-center">
                     {{ movie.name }}
                 </h3>
+                    <h6 class="text-center">
+                    Original Movie Title: {{ movie.original }}
+                </h6>
                 <p>{{ movie.description }}</p>
-                <h5>Director: {{ movie.director }}</h5>
-                <h5>Cast: {{ movie.cast }}</h5>
                 <h5>Rating: {{ average }}/10</h5>
-                <h5>Category: {{ movie.category }}</h5>
+                <h5>Run Time: {{ movie.time }} minutes</h5>
+                <h5>Release Date: {{ movie.release_date }}</h5>
+                <h5>Category: {{ movie.get_category }}</h5>
+                <h5>Spoken Languages: {{ movie.get_language }}</h5>
+
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
                         <a href="{% url 'main:edit_movies' movie.id %}" class="btn btn-warning" >Edit Movie</a>
@@ -46,7 +51,7 @@
             <div class="card-body" style="background-color:#fff7e9;">
                 <div class="row">
                     <div class="col-md-3">
-                        <h5 class="text-left">User: {{ review.user.username }}</h5>
+                        <h5 class="text-left">User:<a href="#"> {{ review.user.username }}</a></h5>
                         <h5>Rate: {{ review.rating }}</h5>
 
                         {% if request.user == review.user %}
@@ -84,6 +89,18 @@
     </div>
 </div>
 <br>
+<div class="card">
+    <div class="card-body">
+
+        <h3 class="text-center">Similary Movies</h3>
+            <h3 class="text-center">
+                {% for n in data.results %}
+                    {{ n.title }}
+                {% endfor %}
+                </h3>
+
+    </div>
+</div>
 
 
 </div>

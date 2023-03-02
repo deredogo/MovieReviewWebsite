@@ -31,12 +31,16 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'main:home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'main:add_movies' %}">Add Movies</a>
-      </li>
-
-       {% if user.is_authenticated %}
-      <li class="nav-item">
+         <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:theatres' %}">In Theatres</a>
+            </li>
+      {% if request.user.is_authenticated %}
+          {% if request.user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:add_movies' %}">Add Movies</a>
+            </li>
+          {% endif%}
+       <li class="nav-item">
             <a class="nav-link" href="{% url 'main:favourite_list' %}">Favourite Movies</a>
           </li>
        {% endif %}
@@ -49,7 +53,7 @@
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{% url 'accounts:profile' %}">My Profile</a>
 
-          <a class="dropdown-item" href="#">Edit Profile</a>
+          <a class="dropdown-item" href="{% url 'accounts:edit_profile' %}">Edit Profile</a>
 
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
@@ -67,11 +71,12 @@
     </ul>
     <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'main:home' %}">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="title">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Movie</button>
     </form>
   </div>
 </nav>
 <!--navbar -->
+
 
 
     {% block content %}
@@ -118,7 +123,7 @@
 
         <!--Grid column-->
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Your Actions</h5>
+          <h5 class="text-uppercase">Quick Links</h5>
           <hr
                 class="mb-4 mt-0 d-inline-block mx-auto"
                 style="width: 60px; background-color: #7c4dff; height: 2px"

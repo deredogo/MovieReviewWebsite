@@ -23,6 +23,7 @@
             <h5 class="mb-3">If u have already joined us...</h5>
             <a class="btn btn-outline-light btn-lg" href="{% url 'accounts:login' %}" role="button">Login</a>
             {% endif %}
+            </br></br>
 
         </div>
       </div>
@@ -36,12 +37,12 @@
     <div class="card" id="backdrop">
         <div class="card-body">
             <div class="row">
-                {% for movie in movies %}
+                {% for movie in page.object_list %}
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
                               <div class="text-center">
-                            <img src="{{ movie.image }}" alt="" class="img-fluid" width="80%">
+                            <img src="https://image.tmdb.org/t/p/original/{{ movie.image }}" alt="" class="img-fluid" width="80%">
                             <h3 class="text-center">{{ movie.name }}</h3>
 
                             <i class="text-center" >{{ movie.release_date }}</i>
@@ -53,10 +54,21 @@
                 {% endfor %}
             </div>
         </div>
-
     </div>
-
-
 </div>
+<br/></br>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+     {% if page.has_previous %}
+     <li class="page-item"><a class="page-link" href="{% url 'main:home' %}?page=1">&laquo First Page</a></li>
+     <li class="page-item"><a class="page-link" href="{% url 'main:home' %}?page={{ page.previous_page_number }}">Previous Page</a></li>
+     {% endif%}
+     <li class="page-item disabled"><a class="page-link" href="#">Page {{ page.number }} of {{ page.paginator.num_pages }}</a></li>
+     {% if page.has_next %}
+     <li class="page-item"><a class="page-link" href="{% url 'main:home' %}?page={{ page.next_page_number }}">Next Page</a></li>
+     <li class="page-item"><a class="page-link" href="{% url 'main:home' %}?page={{ page.paginator.num_pages }}">Last Page &raquo</a></li>
+     {% endif%}
+  </ul>
+</nav>
 
 {% endblock %}

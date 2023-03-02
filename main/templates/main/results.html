@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="card" id="backdrop">
+        <div class="card-body">
+            <div class="row">
+                {% for n in data.results %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                              <div class="text-center">
+                            <img src="https://image.tmdb.org/t/p/original/{{ n.poster_path }}" alt="" class="img-fluid" width="80%">
+                            <h3 class="text-center">{{ n.original_title }}</h3>
+
+                            <i class="text-center" >{{ n.release_date }}</i>
+                            </div>
+                            <a href="{% url 'main:movie_detail' n.id %}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

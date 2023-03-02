@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'main.css' %}" >
+<div class="container" >
+     <div
+        class="p-5 text-center bg-image"
+        style="
+          background-image: url('https://istanbul.com/blog/wp-content/uploads/2020/01/64710.jpg');
+          height: 400px;
+        "
+      >
+         <div class="container" style="background-color:#ba1919;">
+            <section class="jumbotron text-center bg-white" >
+
+                    <div class="container">
+                        <h1>Comming Soon</h1>
+
+                    </div>
+            </section>
+        </div>
+     </div>
+</div>
+
+<div class="container">
+    <br>
+    <div class="card" id="backdrop">
+        <div class="card-body">
+            <div class="row">
+                {% for n in data.results %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                              <div class="text-center">
+                            <img src="https://image.tmdb.org/t/p/original/{{ n.poster_path }}" alt="" class="img-fluid" width="80%">
+                            <h3 class="text-center">{{ n.title }}</h3>
+
+                            <i class="text-center" >{{ n.release_date }}</i>
+
+                            </div>
+                             >
+                            <a href="{% url 'main:movie_detail' n.id %}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

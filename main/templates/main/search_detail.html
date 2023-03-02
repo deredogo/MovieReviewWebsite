@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+               <img src="https://image.tmdb.org/t/p/original/{{ data.poster_path }}" alt="..." class="img-fluid" >
+            </div>
+            <div class="col-md-8">
+                <h3 class="text-center">
+                    {{ data.title }}
+                </h3>
+                 <h6 class="text-center">
+                    Original Movie Title: {{ data.original_title }}
+                </h6>
+                <p>{{ data.overview }}</p>
+                <h5>IMDB Rating: {{ data.vote_average }}/10</h5>
+                <h5>Category: </h5>
+                <ul>
+                    {% for g in data.genres %}
+                    <button type="button" class="btn btn-dark"><li>{{ g.name }}</li></button>
+                    {% endfor %}
+                </ul>
+                 <h5>Spoken Languages: </h5>
+                <ul>
+                    {% for l in data.spoken_languages %}
+                      <button type="button" class="btn btn-dark">{{ l.english_name }}</button>
+                    {% endfor %}
+                </ul>
+
+                {% if request.user.is_authenticated %}
+
+                {% endif %}
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <br>
+
+
+</div>
+{% endblock %}
